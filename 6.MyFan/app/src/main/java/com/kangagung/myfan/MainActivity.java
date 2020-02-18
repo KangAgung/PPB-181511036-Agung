@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     ObjectAnimator rotateAnimator;
     Switch switchButton;
     SeekBar seekBar;
-    final int SPEED[] = {0, 5000, 3000, 1000, 500};
+    final int SPEED[] = {0, 2000, 1000, 500};
     GradientDrawable gd = new GradientDrawable();
 
     @Override
@@ -36,10 +36,10 @@ public class MainActivity extends AppCompatActivity {
 
         gd.setShape(GradientDrawable.OVAL);
         gd.setGradientType(GradientDrawable.RADIAL_GRADIENT);
-        gd.setGradientRadius(1080);
+        gd.setGradientRadius(720);
 
         rotateAnimator=ObjectAnimator.ofFloat(imageView, "rotation", 0,360);
-        rotateAnimator.setDuration(1000);
+        rotateAnimator.setDuration(3600);
         rotateAnimator.setRepeatCount(ValueAnimator.INFINITE);
         rotateAnimator.setInterpolator(new LinearInterpolator());
 
@@ -48,9 +48,12 @@ public class MainActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
                     rotateAnimator.setDuration(SPEED[seekBar.getProgress()]);
-                    rotateAnimator.start();
+                    rotateAnimator.resume();
+                    if (!rotateAnimator.isStarted()) {
+                        rotateAnimator.start();
+                    }
                 } else {
-                    rotateAnimator.end();
+                    rotateAnimator.pause();
                 }
             }
         });
@@ -71,7 +74,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 rotateAnimator.setDuration(SPEED[progress]);
-                rotateAnimator.start();
+                if (!rotateAnimator.isStarted()) {
+                    rotateAnimator.start();
+                }
             }
 
             @Override
