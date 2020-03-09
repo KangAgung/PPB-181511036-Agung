@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:id="@+id/activity_main">
+
+    <Button
+        android:layout_width="310dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnPreferences"
+        android:text="Load Preferences Screen"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintLeft_toLeftOf="@+id/activity_main"
+        app:layout_constraintTop_toTopOf="@+id/activity_main"
+        app:layout_constraintRight_toRightOf="@+id/activity_main"
+        app:layout_constraintBottom_toBottomOf="@id/activity_main"
+        app:layout_constraintVertical_bias="0.0"
+        android:onClick="onClickLoad" />
+
+    <Button
+        android:layout_width="310dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnDisplayValues"
+        android:text="Display Preferences Values"
+        android:layout_marginTop="16dp"
+        app:layout_constraintLeft_toLeftOf="@+id/btnPreferences"
+        app:layout_constraintRight_toRightOf="@+id/btnPreferences"
+        app:layout_constraintTop_toBottomOf="@id/btnPreferences"
+        android:onClick="onClickDisplay" />
+
+    <EditText
+        android:layout_width="310dp"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/editText"
+        app:layout_constraintLeft_toLeftOf="@id/btnPreferences"
+        app:layout_constraintTop_toBottomOf="@id/btnDisplayValues"
+        android:layout_marginTop="16dp"
+        app:layout_constraintRight_toRightOf="@id/btnPreferences" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Modiffy Preferences Values"
+        android:id="@+id/btnModifyValues"
+        app:layout_constraintLeft_toLeftOf="@id/btnDisplayValues"
+        app:layout_constraintTop_toBottomOf="@id/editText"
+        app:layout_constraintRight_toRightOf="@id/btnDisplayValues"
+        android:onClick="onClickModify"
+        android:layout_marginTop="16dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
