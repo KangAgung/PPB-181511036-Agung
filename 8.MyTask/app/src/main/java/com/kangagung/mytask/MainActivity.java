@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<Task> myDataset;
+    Cursor c;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
-        myDataset = new ArrayList<Task>();
+        myDataset = getAllTaskFromDB();
 
         recyclerView.setHasFixedSize(true);
 
@@ -45,11 +47,34 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(i,request_code);
     }
 
+    public ArrayList<Task> getAllTaskFromDB() {
+        ArrayList<Task> task = new ArrayList<>();
+        DBAdapter db = new DBAdapter(this);
+
+        // get all contact
+        db.open();
+        c = db.getAllTask();
+        if (c.moveToFirst())
+        {
+            do {
+                String nama = c.getString(1);
+                task.add(new Task(nama));
+            } while (c.moveToNext());
+        }
+        db.close();
+
+        return task;
+    }
+
     public void onActivityResult(int requestCode, int resultCode, Intent i) {
         if (requestCode == request_code) {
             if (resultCode == RESULT_OK) {
                 Task newTask = (Task) i.getSerializableExtra("task");
                 myDataset.add(newTask);
+                DBAdapter db = new DBAdapter(this);
+                db.open();
+                long id = db.insertTask(newTask.getName());
+                db.close();
             }
         }
     }

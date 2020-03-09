@@ -11,7 +11,6 @@ import java.io.Serializable;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class AddTaskActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +23,7 @@ public class AddTaskActivity extends AppCompatActivity {
         EditText taskName = (EditText) findViewById(R.id.taskName);
 
         Task newTask = new Task(taskName.getText().toString());
+
         Bundle extras = new Bundle();
         extras.putSerializable("task",newTask);
         i.putExtras(extras);
