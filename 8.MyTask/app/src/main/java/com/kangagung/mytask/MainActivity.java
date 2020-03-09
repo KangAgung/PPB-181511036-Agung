@@ -41,14 +41,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClick(View view) {
-        Intent data = new Intent("com.kangagung.mytask.AddTaskActivity");
-        startActivityForResult(data,request_code);
+        Intent i = new Intent("com.kangagung.mytask.AddTaskActivity");
+        startActivityForResult(i,request_code);
     }
 
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent i) {
         if (requestCode == request_code) {
             if (resultCode == RESULT_OK) {
-                Task newTask = (Task) data.getSerializableExtra("newTask");
+                Task newTask = (Task) i.getSerializableExtra("task");
                 myDataset.add(newTask);
             }
         }

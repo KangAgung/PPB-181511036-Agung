@@ -24,8 +24,9 @@ public class AddTaskActivity extends AppCompatActivity {
         EditText taskName = (EditText) findViewById(R.id.taskName);
 
         Task newTask = new Task(taskName.getText().toString());
-
-        i.putExtra("newTask", (Serializable) newTask);
+        Bundle extras = new Bundle();
+        extras.putSerializable("task",newTask);
+        i.putExtras(extras);
 
         setResult(RESULT_OK, i);
         finish();
