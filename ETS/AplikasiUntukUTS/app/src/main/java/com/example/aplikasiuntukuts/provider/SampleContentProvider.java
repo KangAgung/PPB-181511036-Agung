@@ -47,7 +47,7 @@ import java.util.concurrent.Callable;
 public class SampleContentProvider extends ContentProvider {
 
     /** The authority of this content provider. */
-    public static final String AUTHORITY = "com.example.aplikasiuntukuts.provider";
+    public static final String AUTHORITY = "com.example.android.contentprovidersample.provider";
 
     /** The URI for the Cheese table. */
     public static final Uri URI_CHEESE = Uri.parse(
