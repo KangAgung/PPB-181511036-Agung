@@ -18,11 +18,17 @@
 
 package com.example.aplikasiuntukuts.data;
 
+import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import android.content.Context;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import androidx.annotation.VisibleForTesting;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 /**
  * The Room database.
@@ -39,6 +45,10 @@ public abstract class SampleDatabase extends RoomDatabase {
     /** The only instance */
     private static SampleDatabase sInstance;
 
+    private static final int NUMBER_OF_THREADS = 4;
+    static final ExecutorService databaseWriteExecutor =
+            Executors.newFixedThreadPool(NUMBER_OF_THREADS);
+
     /**
      * Gets the singleton instance of SampleDatabase.
      *
@@ -49,11 +59,25 @@ public abstract class SampleDatabase extends RoomDatabase {
         if (sInstance == null) {
             sInstance = Room
                     .databaseBuilder(context.getApplicationContext(), SampleDatabase.class, "ex")
+                    .addCallback(sDatabaseCallback)
                     .build();
-            sInstance.populateInitialData(); // to Inserts the dummy data into the database if it is currently empty
+//            sInstance.populateInitialData(); // to Inserts the dummy data into the database if it is currently empty
         }
         return sInstance;
     }
+
+    private static RoomDatabase.Callback sDatabaseCallback = new RoomDatabase.Callback() {
+        @Override
+        public void onOpen(@NonNull SupportSQLiteDatabase db) {
+            super.onOpen(db);
+            databaseWriteExecutor.execute(() -> {
+                CheeseDao dao = sInstance.cheese();
+                for (int i = 0; i < Cheese.CHEESES.length; i++) {
+                    dao.insert(new Cheese(Cheese.CHEESES[i]));
+                }
+            });
+        }
+    };
 
     /**
      * Switches the internal implementation with an empty in-memory database.

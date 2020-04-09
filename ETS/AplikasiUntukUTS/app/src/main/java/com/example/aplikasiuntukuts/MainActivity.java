@@ -39,6 +39,7 @@ import com.example.aplikasiuntukuts.provider.SampleContentProvider;
 import com.example.aplikasiuntukuts.ui.CheeseAdapter;
 import com.example.aplikasiuntukuts.viewmodel.CheeseViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -65,15 +66,15 @@ public class MainActivity extends AppCompatActivity {
 
         LoaderManager.getInstance(this).initLoader(LOADER_CHEESES, null, mLoaderCallbacks);
 
-//        mCheeseViewModel = new ViewModelProvider(this).get(CheeseViewModel.class);
-//
-//        mCheeseViewModel.getAllCheese().observe(this, new Observer<List<Cheese>>() {
-//            @Override
-//            public void onChanged(@Nullable final List<Cheese> cheeses) {
-//                // Update the cached copy of the words in the adapter.
-//                mCheeseAdapter.setCheeses(cheeses);
-//            }
-//        });
+        mCheeseViewModel = new ViewModelProvider(this).get(CheeseViewModel.class);
+
+        mCheeseViewModel.getAllCheese().observe(this, new Observer<List<Cheese>>() {
+            @Override
+            public void onChanged(@Nullable final List<Cheese> cheeses) {
+                // Update the cached copy of the words in the adapter.
+                mCheeseAdapter.setCheeses(cheeses);
+            }
+        });
     }
 
     private final LoaderManager.LoaderCallbacks<Cursor> mLoaderCallbacks =
@@ -90,7 +91,13 @@ public class MainActivity extends AppCompatActivity {
 
                 @Override
                 public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor data) {
-                    mCheeseAdapter.setCheeses(data);
+                    ArrayList<Cheese> cheeses = new ArrayList<>();
+                    while (data.moveToNext()) {
+                        final long id = data.getLong(data.getColumnIndex(Cheese.COLUMN_ID));
+                        final String name = data.getString(data.getColumnIndex(Cheese.COLUMN_NAME));
+                        cheeses.add(new Cheese(id,name));
+                    }
+                    mCheeseAdapter.setCheeses(cheeses);
                 }
 
                 @Override

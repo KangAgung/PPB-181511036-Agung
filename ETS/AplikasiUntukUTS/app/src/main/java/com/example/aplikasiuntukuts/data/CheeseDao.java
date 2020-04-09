@@ -18,11 +18,14 @@
 
 package com.example.aplikasiuntukuts.data;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 import android.database.Cursor;
+
+import java.util.List;
 
 
 @Dao
@@ -61,6 +64,14 @@ public interface CheeseDao {
      */
     @Query("SELECT * FROM " + Cheese.TABLE_NAME)
     Cursor selectAll();
+
+    /**
+     * Select all cheeses.
+     *
+     * @return A {@link Cursor} of all the cheeses in the table.
+     */
+    @Query("SELECT * FROM " + Cheese.TABLE_NAME)
+    LiveData<List<Cheese>> selectAllCheese();
 
     /**
      * Select a cheese by the ID.

@@ -48,6 +48,8 @@ public class Cheese {
     @ColumnInfo(name = COLUMN_NAME)
     public String name;
 
+    public Cheese() { }
+
     /**
      * Create a new {@link Cheese} from the specified {@link ContentValues}.
      *
@@ -200,4 +202,20 @@ public class Cheese {
             "Zamorano", "Zanetti Grana Padano", "Zanetti Parmigiano Reggiano"
     };
 
+    public String getName() {
+        return name;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public Cheese(String name) {
+        this.name = name;
+    }
+
+    public Cheese(long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 }

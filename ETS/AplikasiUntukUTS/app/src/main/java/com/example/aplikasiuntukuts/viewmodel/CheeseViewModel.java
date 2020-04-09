@@ -5,18 +5,20 @@ import android.app.Application;
 import com.example.aplikasiuntukuts.CheeseRepository;
 import com.example.aplikasiuntukuts.data.Cheese;
 
+import java.util.List;
+
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 public class CheeseViewModel extends AndroidViewModel {
 
-    private final LiveData<Cheese> mCheese;
+    private final LiveData<List<Cheese>> mCheese;
 
     public CheeseViewModel(Application application) {
         super(application);
         CheeseRepository repository = new CheeseRepository(application);
-        mCheese = (LiveData<Cheese>) repository.getCheese();
+        mCheese = repository.getCheese();
     }
 
-    public LiveData<Cheese> getAllCheese() { return mCheese; }
+    public LiveData<List<Cheese>> getAllCheese() { return mCheese; }
 }

@@ -1,17 +1,18 @@
 package com.example.aplikasiuntukuts.ui;
 
-import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.aplikasiuntukuts.data.Cheese;
 
+import java.util.List;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class CheeseAdapter extends RecyclerView.Adapter<CheeseAdapter.ViewHolder> {
-    private Cursor mCursor;
+    private List<Cheese> mCheese;
 
     @Override
     @NonNull
@@ -21,20 +22,19 @@ public class CheeseAdapter extends RecyclerView.Adapter<CheeseAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        if (mCursor.moveToPosition(position)) {
-            holder.mText.setText(mCursor.getString(
-                    mCursor.getColumnIndexOrThrow(Cheese.COLUMN_NAME)));
+        if (mCheese.get(position ) != null) {
+            holder.mText.setText(mCheese.get(position).getName());
         }
     }
 
     @Override
     public int getItemCount() {
-        return mCursor == null ? 0 : mCursor.getCount();
+        return mCheese == null ? 0 : mCheese.size();
     }
 
 
-    public void setCheeses(Cursor cursor) {
-        mCursor = cursor;
+    public void setCheeses(List<Cheese> cheeses) {
+        mCheese = cheeses;
         notifyDataSetChanged();
     }
 
