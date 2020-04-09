@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.aplikasiuntukuts">
-    <permission android:name="com.example.aplikasiuntukuts.READ_WRITE"/>
+    <permission android:name="com.example.android.contentprovidersample.provider.READ_WRITE"/>
 
     <application
         android:allowBackup="true"
@@ -20,9 +20,10 @@
 
         <provider
             android:name=".provider.SampleContentProvider"
-            android:authorities="com.example.aplikasiuntukuts.provider"
+            android:authorities="com.example.android.contentprovidersample.provider"
             android:exported="true"
-            android:permission="com.example.aplikasiuntukuts.READ_WRITE"/>
+            android:permission="com.example.android.contentprovidersample.provider.READ_WRITE"
+            android:grantUriPermissions="true"/>
     </application>
 
 </manifest>
