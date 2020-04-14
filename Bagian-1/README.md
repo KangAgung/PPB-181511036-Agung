@@ -9,7 +9,7 @@ PPB-181511036-Agung
      |-- 4.ActivityLifeCycle
      |-- 5.MyCalculator
      |-- 6.MyFan
-     |-- 7.DialogWindow
+     |-- 7.ProgressDialog
      |-- 8.MyTask
      |-- 9.UsingIntent
      |-- 10.PassingData
