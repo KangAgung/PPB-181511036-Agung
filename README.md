@@ -6,6 +6,7 @@ Repository mata kuliah Pemrograman Perangkat Berjalan
 PPB-181511036-Agung
 |-- Bagian-1
 |-- Bagian-2
+|-- ETS
 |-- .gitignore
 |-- LICENSE
 |-- README.md (this file)
@@ -22,7 +23,7 @@ PPB-181511036-Agung
      |-- 4.ActivityLifeCycle
      |-- 5.MyCalculator
      |-- 6.MyFan
-     |-- 7.DialogWindow
+     |-- 7.ProgressDialog
      |-- 8.MyTask
      |-- 9.UsingIntent
      |-- 10.PassingData
