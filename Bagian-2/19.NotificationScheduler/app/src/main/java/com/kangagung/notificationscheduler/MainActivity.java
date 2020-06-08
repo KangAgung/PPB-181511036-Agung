@@ -40,9 +40,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 if (i > 0){
-                    seekBarProgress.setText(i + " s");
+                    seekBarProgress.setText(getString(R.string.seconds,i));
                 }else {
-                    seekBarProgress.setText("Not Set");
+                    seekBarProgress.setText(R.string.not_set);
                 }
             }
 
@@ -92,10 +92,9 @@ public class MainActivity extends AppCompatActivity {
         if (constraintSet) {
             JobInfo myJobInfo = builder.build();
             mScheduler.schedule(myJobInfo);
-            Toast.makeText(this, "Job Scheduled, job will run when " +
-                    "the constraints are met.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.job_scheduled, Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(this, "Please set at least one constraint", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.no_constraint_toast, Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -104,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
         if (mScheduler!=null){
             mScheduler.cancelAll();
             mScheduler = null;
-            Toast.makeText(this, "Jobs cancelled", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.jobs_canceled, Toast.LENGTH_SHORT).show();
         }
     }
 }

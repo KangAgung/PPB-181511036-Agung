@@ -18,9 +18,6 @@ public class NotificationJobService extends JobService {
     private static final String PRIMARY_CHANNEL_ID =
             "primary_notification_channel";
 
-    /**
-     * Creates a Notification channel, for OREO and higher.
-     */
     public void createNotificationChannel() {
 
         // Define notification manager object.
@@ -35,14 +32,14 @@ public class NotificationJobService extends JobService {
             // Create the NotificationChannel with all the parameters.
             NotificationChannel notificationChannel = new NotificationChannel
                     (PRIMARY_CHANNEL_ID,
-                            "Job Service notification",
+                            getString(R.string.job_service_notification),
                             NotificationManager.IMPORTANCE_HIGH);
 
             notificationChannel.enableLights(true);
             notificationChannel.setLightColor(Color.RED);
             notificationChannel.enableVibration(true);
             notificationChannel.setDescription
-                    ("Notifications from Job Service");
+                    (getString(R.string.notification_channel_description));
 
             mNotifyManager.createNotificationChannel(notificationChannel);
         }
@@ -60,8 +57,8 @@ public class NotificationJobService extends JobService {
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder
                 (this, PRIMARY_CHANNEL_ID)
-                .setContentTitle("Job Service")
-                .setContentText("Your Job ran to completion!")
+                .setContentTitle(getString(R.string.job_service))
+                .setContentText(getString(R.string.job_running))
                 .setContentIntent(contentPendingIntent)
                 .setSmallIcon(R.drawable.ic_job_running)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
