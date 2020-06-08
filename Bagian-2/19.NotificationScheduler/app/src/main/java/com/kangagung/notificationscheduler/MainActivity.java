@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
     public void cancelJobs(View view) {
         if (mScheduler!=null){
             mScheduler.cancelAll();
-            mScheduler = null;
+            mScheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
             Toast.makeText(this, R.string.jobs_canceled, Toast.LENGTH_SHORT).show();
         }
     }
