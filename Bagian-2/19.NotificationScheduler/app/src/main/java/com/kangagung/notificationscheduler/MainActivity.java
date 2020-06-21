@@ -34,8 +34,6 @@ public class MainActivity extends AppCompatActivity {
 
         final TextView seekBarProgress = findViewById(R.id.seekBarProgress);
 
-        mScheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
-
         mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
@@ -58,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
         RadioGroup networkOptions = findViewById(R.id.networkOptions);
         int selectedNetworkID = networkOptions.getCheckedRadioButtonId();
         int selectedNetworkOption = JobInfo.NETWORK_TYPE_NONE;
+
+        mScheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
 
         int seekBarInteger = mSeekBar.getProgress();
         boolean seekBarSet = seekBarInteger > 0;
@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
     public void cancelJobs(View view) {
         if (mScheduler!=null){
             mScheduler.cancelAll();
-            mScheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
+            mScheduler = null;
             Toast.makeText(this, R.string.jobs_canceled, Toast.LENGTH_SHORT).show();
         }
     }
